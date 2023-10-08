@@ -1,24 +1,29 @@
 class Purchase():
 
-# TODO: make list of all purchases ✅
+    #creates a class-level attribute named all which is a list. This list will be used to keep track of all instances of the Purchase class.
     all = []
 
     def __init__(self, person, makeup_item, date = "03/04/2020"):
+        #These lines assign the values of person, makeup_item, and date passed as parameters to attributes _person, _makeup_item, and _date 
         self._person = person
         self._makeup_item = makeup_item
         self._date = date
-
+        #appends the current instance to the all list. This way, the class keeps track of all instances created.
         Purchase.all.append(self)
 
-        # TODO: construct purchase object as SSOT ✅
-        self.person.makeup_items.append(self.makeup_item) # person.makeup_items.append(makeup_item)
-        self.person.purchases.append(self) # person.purchases.append(self)
+        #Lines  Constructing purchase object as SSOT (Single Source Of Truth)
 
-        self.makeup_item.owners.append(self.person) # makeup_item.owners.append(person)
-        self.makeup_item.purchases.append(self) # makeup_item.purchases.append(self)
+        #Appends the current makeup_item to the list of makeup items owned by the person who made the purchase
+        self.person.makeup_items.append(self.makeup_item) #alternate way: person.makeup_items.append(makeup_item)
+        #Appends the current instance (the purchase) to the list of purchases made by the person.
+        self.person.purchases.append(self) #alternate way: person.purchases.append(self)
 
-    # TODO: make property for person (must be instance of People class) ✅
-    # TODO: make property for makeup_item (must be instance of Makeup class) ✅
+        #Appends the person who made the purchase to the list of owners of the makeup item.
+        self.makeup_item.owners.append(self.person) #alternate way: makeup_item.owners.append(person)
+        #Appends the current instance (the purchase) to the list of purchases made for the makeup item.
+        self.makeup_item.purchases.append(self) #alternate way: makeup_item.purchases.append(self)
+
+
 
     @property
     def person(self):
